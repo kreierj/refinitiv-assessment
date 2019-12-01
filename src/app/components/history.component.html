@@ -1,1 +1,6 @@
-History Component
+<strong>Transaction History</strong>
+<div *ngFor="let h of history" class="row">
+  <div class="col-lg-3 col-6">{{h.timestamp | date:'medium'}}</div>
+  <ng-container *ngIf="h.success; else insufficient" class="col-lg-3 col-6">Dispensed ${{h.amount}}</ng-container>
+  <ng-template #insufficient>Insufficient Funds</ng-template>
+</div>

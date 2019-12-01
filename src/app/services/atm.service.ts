@@ -32,13 +32,17 @@ export class AtmService {
         return Object.keys(this.denominations).map(k => this.denominations[k]).map((d: Denomination) => Object.assign({}, d));
     }
 
+    public getTransactions(): WithdrawlResult[] {
+        return this.transactionHistory.map(t => Object.assign({}, t));
+    }
+
     public withdraw(amount: number): Observable<WithdrawlResult> {
         if (!Number.isInteger(amount)) {
-            return this.transactionFailure();
+            return this.transactionFailure(amount);
         }
 
         if (amount < 0) {
-            return this.transactionFailure();
+            return this.transactionFailure(amount);
         }
 
         var denominationsToDispense: Denomination[] = [];
@@ -70,9 +74,9 @@ export class AtmService {
                 console.assert(denomination.count >= 0, "Unexpected denomination count: " + denomination)
             }
 
-            return this.transactionSuccess();
+            return this.transactionSuccess(amount);
         } else {
-            return this.transactionFailure();
+            return this.transactionFailure(amount);
         }
     }
 
@@ -87,16 +91,18 @@ export class AtmService {
         return of(true);
     }
 
-    private transactionFailure(): Observable<WithdrawlResult> {
-        var result = { success: false }
+    private transactionFailure(amount: number): Observable<WithdrawlResult> {
+        var result = { success: false, amount: amount, timestamp: new Date() }
         this.transactionHistory.push(result);
-        return of(result);
+
+        return of(Object.assign({},result));
     }
 
-    private transactionSuccess(): Observable<WithdrawlResult> {
-        var result = { success: true }
+    private transactionSuccess(amount: number): Observable<WithdrawlResult> {
+        var result = { success: true, amount: amount, timestamp: new Date() }
         this.transactionHistory.push(result);
-        return of(result);
+
+        return of(Object.assign({}, result));
     }
 
     private orderByDesc(a: number, b: number) {
@@ -118,4 +124,6 @@ export interface Denomination {
 
 export interface WithdrawlResult {
     success: boolean;
+    amount: number;
+    timestamp: Date;
 }

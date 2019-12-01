@@ -1,1 +1,8 @@
-Overview Component
+<div class="row">
+  <strong class="col-lg-3 col-6">Denomination</strong>
+  <strong class="col-lg-3 col-6-6">Quantity</strong>
+</div>
+<div *ngFor="let d of denominations" class="row">
+  <label class="col-lg-3 col-6">{{d.name}}</label>
+  <label class="col-lg-3 col-6">{{d.count}}</label>
+</div>

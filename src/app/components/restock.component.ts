@@ -34,7 +34,6 @@ export class RestockComponent {
                 .map(key => { return { key: key, count: Number(formValue[key]) }; })
                 .filter(kvp => kvp.count && kvp.count > 0)
                 .map(kvp => {
-
                     var match = this.denominations.find(d => d.name === kvp.key)
                     var result: Denomination = { value: match.value, count: kvp.count };
                     return result;
