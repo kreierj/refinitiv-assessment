@@ -16,6 +16,9 @@ import { RestockPage } from './pages/restock.page';
 import { WithdrawPage } from './pages/withdraw.page';
 import { AtmService } from './services/atm.service';
 import { WithdrawComponent } from './components/withdraw.component';
+import { RestockComponent } from './components/restock.component';
+import { OverviewComponent } from './components/overview.component';
+import { HistoryComponent } from './components/history.component';
 
 
 @NgModule({
@@ -24,7 +27,10 @@ import { WithdrawComponent } from './components/withdraw.component';
       OverviewPage,
       RestockPage,
       WithdrawPage,
-      WithdrawComponent
+      WithdrawComponent,
+      RestockComponent,
+      OverviewComponent,
+      HistoryComponent
   ],
   imports: [
     BrowserModule,
