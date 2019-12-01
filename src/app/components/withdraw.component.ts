@@ -42,7 +42,7 @@ export class WithdrawComponent {
         this.snackBar.open(message, "OK", {
             verticalPosition: 'top',
             panelClass: 'snackbar-' + style,
-            duration: 2000
+            duration: 1000
         });
     }
 

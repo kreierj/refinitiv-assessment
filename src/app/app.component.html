@@ -1,12 +1,17 @@
-<ul>
-  <li>
-    <h2><a [routerLink]="['/withdraw']">Withdraw</a></h2>
-  </li>
-  <li>
-    <h2><a [routerLink]="['/restock']">Restock</a></h2>
-  </li>
-  <li>
-    <h2><a [routerLink]="['/overview']">Overview</a></h2>
-  </li>
-</ul>
-<router-outlet></router-outlet>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" [routerLink]="['/withdraw']">Withdraw</a>
+        <a class="nav-item nav-link" [routerLink]="['/restock']">Restock</a>
+        <a class="nav-item nav-link" [routerLink]="['/overview']">Overview</a>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
