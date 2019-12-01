@@ -55,14 +55,23 @@ export class AtmService {
             }
 
             var toDispense: Denomination = { value: denomination.value, count: 0 };
-            while (amount >= amountDispensed + denomination.value) {
-                if (toDispense.count < denomination.count) {
-                    toDispense.count++;
-                    amountDispensed += toDispense.value;
-                } else {
-                    break;
-                }
-            }
+
+            var amountRemaining = amount - amountDispensed;
+            var quotient = amountRemaining / denomination.value;
+            var floor = Math.floor(quotient);
+            var countDispensed = Math.min(denomination.count, floor);
+
+            toDispense.count = countDispensed;
+            amountDispensed += countDispensed * denomination.value;
+
+            //while (amount >= amountDispensed + denomination.value) {
+            //    if (toDispense.count < denomination.count) {
+            //        toDispense.count++;
+            //        amountDispensed += toDispense.value;
+            //    } else {
+            //        break;
+            //    }
+            //}
 
             denominationsToDispense.push(toDispense);
         }

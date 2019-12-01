@@ -4,5 +4,5 @@
 </div>
 <div *ngFor="let d of denominations" class="row">
   <label class="col-lg-3 col-6">{{d.name}}</label>
-  <label class="col-lg-3 col-6">{{d.count}}</label>
+  <label class="col-lg-3 col-6">{{d.count | number}}</label>
 </div>
