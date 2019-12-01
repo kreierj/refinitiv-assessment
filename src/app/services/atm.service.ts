@@ -64,15 +64,6 @@ export class AtmService {
             toDispense.count = countDispensed;
             amountDispensed += countDispensed * denomination.value;
 
-            //while (amount >= amountDispensed + denomination.value) {
-            //    if (toDispense.count < denomination.count) {
-            //        toDispense.count++;
-            //        amountDispensed += toDispense.value;
-            //    } else {
-            //        break;
-            //    }
-            //}
-
             denominationsToDispense.push(toDispense);
         }
 
