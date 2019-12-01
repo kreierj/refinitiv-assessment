@@ -1,1 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+$error: #FF0000;
+$success: #00FF00;
+
+
+html {
+  --color-error: #{$error};
+  --color-error-light: #{lighten($error, 30%)};
+  --color-error-dark: #{darken($error, 30%)};
+
+  --color-success: #{$success};
+  --color-success-light: #{lighten($success, 30%)};
+  --color-success-dark: #{darken($success, 30%)};
+}
+
+.snackbar-error {
+  background: var(--color-error-light) !important;
+  color: var(--color-error-dark) !important;
+
+  button {
+    color: var(--color-error-dark) !important;
+    border: 1px solid var(--color-error-dark) !important;
+  }
+}
+
+.snackbar-success {
+  background: var(--color-success-light) !important;
+  color: var(--color-success-dark) !important;
+
+  button {
+    color: var(--color-success-dark) !important;
+    border: 1px solid var(--color-success-dark) !important;
+  }
+}
