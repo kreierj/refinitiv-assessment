@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -7,12 +8,12 @@ export class AtmService {
 
     // List of denominations supported by the ATM
     private denominations: { [key: number]: Denomination } = {
-        100: { name: "Hundred", value: 100, count: 10 },
-        50: { name: "Fifty", value: 50, count: 10 },
-        20: { name: "Twenty", value: 20, count: 10 },
-        10: { name: "Ten", value: 10, count: 10 },
-        5: { name: "Five", value: 5, count: 10 },
-        1: { name: "One", value: 1, count: 10 }
+        100: { name: "Hundreds", value: 100, count: 10 },
+        50: { name: "Fifties", value: 50, count: 10 },
+        20: { name: "Twenties", value: 20, count: 10 },
+        10: { name: "Tens", value: 10, count: 10 },
+        5: { name: "Fives", value: 5, count: 10 },
+        1: { name: "Ones", value: 1, count: 10 }
     };
 
     // Calculated at runtime to allow for easy addition or removal of supported denominations
@@ -27,7 +28,11 @@ export class AtmService {
             .sort(this.orderByDesc)
     }
 
-    public withdraw(amount: number): WithdrawlResult {
+    public getDenominations(): Denomination[] {
+        return Object.keys(this.denominations).map(k => this.denominations[k]).map((d: Denomination) => Object.assign({}, d));
+    }
+
+    public withdraw(amount: number): Observable<WithdrawlResult> {
         if (!Number.isInteger(amount)) {
             return this.transactionFailure();
         }
@@ -71,25 +76,27 @@ export class AtmService {
         }
     }
 
-    public restock(denominations: Denomination[]) {
+    public restock(denominations: Denomination[]): Observable<boolean> {
         for (let d of denominations) {
             var denomination = this.denominations[d.value];
             if (denomination) {
                 denomination.count += d.count;
             }
         }
+
+        return of(true);
     }
 
-    private transactionFailure(): WithdrawlResult {
+    private transactionFailure(): Observable<WithdrawlResult> {
         var result = { success: false }
         this.transactionHistory.push(result);
-        return result;
+        return of(result);
     }
 
-    private transactionSuccess(): WithdrawlResult {
+    private transactionSuccess(): Observable<WithdrawlResult> {
         var result = { success: true }
         this.transactionHistory.push(result);
-        return result;
+        return of(result);
     }
 
     private orderByDesc(a: number, b: number) {

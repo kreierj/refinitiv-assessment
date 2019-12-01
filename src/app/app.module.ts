@@ -19,6 +19,7 @@ import { WithdrawComponent } from './components/withdraw.component';
 import { RestockComponent } from './components/restock.component';
 import { OverviewComponent } from './components/overview.component';
 import { HistoryComponent } from './components/history.component';
+import { ResultService } from './services/result.service';
 
 
 @NgModule({
@@ -43,7 +44,7 @@ import { HistoryComponent } from './components/history.component';
     MatSnackBarModule,
     MatToolbarModule
   ],
-  providers: [AtmService],
+  providers: [AtmService, ResultService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,1 +1,11 @@
-Restock Component
+<form [formGroup]="formGroup" (ngSubmit)="restock()" class="row">
+  <mat-form-field *ngFor="let d of denominations" class="col-lg-4">
+    <mat-label>{{d.name}}</mat-label>
+    <input matInput placeholder="10" type="number" [formControlName]="d.name" />
+  </mat-form-field>
+  <div class="col">
+    <button mat-raised-button color="accent" type="submit" [disabled]="formGroup.invalid">
+      Restock
+    </button>
+  </div>
+</form>

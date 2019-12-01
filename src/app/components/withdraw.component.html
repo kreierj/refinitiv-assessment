@@ -1,7 +1,7 @@
 <form [formGroup]="formGroup" (ngSubmit)="withdraw()" class="p-3">
   <mat-form-field class="mr-3">
     <mat-label>Amount to Withdraw</mat-label>
-    <input matInput placeholder="20" [formControl]="amount" />
+    <input matInput placeholder="20" type="number" [formControl]="amount" />
     <div matPrefix class="mr-1">$</div>
     <mat-error *ngIf="amount.invalid && amount.touched && amount.errors.required">A value is required</mat-error>
     <mat-error *ngIf="amount.invalid && amount.touched && amount.errors.min">The value must be positive</mat-error>
@@ -9,5 +9,4 @@
   <button mat-raised-button color="accent" type="submit" [disabled]="formGroup.invalid">
     Withdraw
   </button>
-  <div>{{resultText}}</div>
 </form>
